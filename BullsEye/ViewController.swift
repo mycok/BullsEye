@@ -14,22 +14,15 @@ class ViewController: UIViewController {
     var score = 0
     var round = 0
 
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var randomNumberLabel: UILabel!
-    @IBOutlet weak var minValueLabel: UILabel!
-    @IBOutlet weak var maxValueLabel: UILabel!
     @IBOutlet weak var slider: UISlider!
-    @IBOutlet weak var clickMeButton: UIButton!
-    
-    @IBOutlet weak var startOverButton: UIButton!
     @IBOutlet weak var infoButton: UIButton!
-    @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var scoreValueLabel: UILabel!
-    @IBOutlet weak var roundLabel: UILabel!
     @IBOutlet weak var roundValueLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        customizeSlider()
         handleGameReset()
     }
 
@@ -95,5 +88,23 @@ class ViewController: UIViewController {
         
         return title
     }
+    
+    func customizeSlider() {
+        let thumbImageNormal = UIImage(named: "SliderThumb-Normal")!
+        let thumbImageHighlighted = UIImage(named: "SliderThumb-Highlighted")!
+        
+        slider.setThumbImage(thumbImageNormal, for: .normal)
+        slider.setThumbImage(thumbImageHighlighted, for: .highlighted)
+        
+        let insets = UIEdgeInsets(top: 0, left: 14, bottom: 0, right: 14)
+        let trackLeftImage = UIImage(named: "SliderTrackLeft")
+        let trackRightImage = UIImage(named: "SliderTrackRight")
+        let trackLeftResizable = trackLeftImage?.resizableImage(withCapInsets: insets)
+        let trackRightResizable = trackRightImage?.resizableImage(withCapInsets: insets)
+
+        slider.setMinimumTrackImage(trackLeftResizable, for: .normal)
+        slider.setMaximumTrackImage(trackRightResizable, for: .normal)
+    }
 }
+
 
